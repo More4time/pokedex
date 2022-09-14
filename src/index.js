@@ -1,97 +1,67 @@
 //Los fetch de lista de pokemones (cada 20), cada pokemon unico y su foto
-
+console.log("probando probando")
 const pokemonContainer = document.querySelector(".pokemon-container")
+
+const siguiente = document.querySelector("#siguiente");
+const atras = document.querySelector("#atras");
 
 const URL_API = `https://pokeapi.co/api/v2/pokemon/`
 
 
-function fetchPokemon(idPagina){
+function traerPagina(idPagina){
     fetch(`${URL_API}?offset=${idPagina*20}&limit=20`)
     .then(r => r.json())
-    .then((data) =>{crearPrimeros20Pokemones(data)
+    .then((data) =>{mostrarListadoPagina((data))
             })
 }
 
-function crearImagen(name){
-    fetch(`${URL_API}${name}/`)
+function traerPokemon(id){
+    fetch(`${URL_API}${id}/`)
     .then(r => r.json())
-    .then((data) =>{vincularPokemonConImagen(data)
+    .then((data) =>{mostrarPokemon((data))
+    console.log(data.sprites.front_default)
             })
 }
 
-function vincularPokemonConImagen(nombrePokemon){
-    const contenedorFoto = document.createElement("div")
-    contenedorFoto.classList.add("foto-contenedor")
-
-    const foto = document.createElement("img")
-    foto.setAttribute.src = (pokemon.data.sprites.front_default)
-
-    contenedorFoto.appendChild(foto)
-    pokemonContainer.appendChild(contenedorFoto)
-}
 
 
-
-
-function crearPrimeros20Pokemones(pokemon){
+function mostrarListadoPagina(pagina){
     for(let i=0; i<20; i++){
     
     const tarjeta = document.createElement("div");
     tarjeta.classList.add("pokemon-container");
 
+    
+
   
 
     const nombre = document.createElement("p")
     nombre.classList.add("nombre");
-    nombre.textContent = (pokemon.results[i].name)
+    nombre.textContent = (pagina.results[i].name)
 
+    
+
+    const fotoPokemon = document.createElement("img")
+    fotoPokemon.classList.add("foto-container")
+    fotoPokemon.setAttribute("src",`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i+1}.png`)
+
+    
   
-
     tarjeta.appendChild(nombre)
+    tarjeta.appendChild(fotoPokemon)
     pokemonContainer.appendChild(tarjeta)
+
+    tarjeta.onclick = function() {console.log(nombre.textContent)};
     }
 
 }
+
+
 
 function iniciar(){
-    fetchPokemon(0)
+    traerPagina(0)
     
     
 }
-iniciar()
 
-
-
-
-
-
-
-
-
-/*function fetchPokemono(id){
-    fetch(`${URL_API}${id}/`)
-    .then(r => r.json())
-    .then((data) =>{traerPrimeras20habilidades((data))
-            })
-}
-
-function traerPrimeras20habilidades(pokemon){
-        for(let i= 0; i<21; i++){
-        
-        const tarjeta = document.createElement("div");
-        tarjeta.classList.add("pokemon-tarjeta");
-    
-      
-    
-        const nombre = document.createElement("p")
-        nombre.classList.add("nombre");
-        nombre.textContent = JSON.stringify(pokemon.abilities[i])
-    
-    
-        tarjeta.appendChild(nombre)
-        
-     
-        
-        pokemonContainer.appendChild(tarjeta)
-    }
-    }*/
+ iniciar()

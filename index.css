@@ -1,3 +1,27 @@
-.pokemon-tarjeta{
-    background-color: ;
-}
+body {
+    background: rgb(85, 144, 189);
+    background: linear-gradient(
+      90deg,
+      rgb(189, 173, 85) 0%,
+      rgba(39, 50, 58, 0) 54%,
+      rgba(182, 216, 242, 1) 82%
+    );
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Oswald", sans-serif;
+  }
+  
+  h1 {
+    color: rgb(0, 0, 0);
+  }
+
+  .pokemon-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    margin-top: 20px;
+  }
